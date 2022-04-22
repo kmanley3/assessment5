@@ -23,17 +23,7 @@ module.exports = {
                 name varchar
             );
 
-            CREATE TABLE cities (
-                city_id SERIAL PRIMARY KEY,
-                name VARCHAR,
-                rating INTEGER,
-                country_id INTEGER REFERENCES countries(country_id)
-            );
-
-            insert into cities (name, rating, country_id)
-            values('Lehi', 4, '3'),
-            ('GoobTown', 5, '5'),
-            ('Berrybye', 1, '21');
+          
 
             insert into countries (name)
             values ('Afghanistan'),
@@ -231,6 +221,18 @@ module.exports = {
             ('Yemen'),
             ('Zambia'),
             ('Zimbabwe');
+
+            CREATE TABLE cities (
+                city_id SERIAL PRIMARY KEY,
+                name VARCHAR,
+                rating INTEGER,
+                country_id INTEGER REFERENCES countries(country_id)
+            );
+
+            INSERT INTO cities (name, rating, country_id)
+            VALUES ('Raspberry Ferry', 5, 41),
+            ('Lothaire', 3, 55),
+            ('Leonem', 2, 82);
         `).then(() => {
             console.log('DB seeded!')
             res.sendStatus(200)
@@ -257,7 +259,7 @@ module.exports = {
 
     getCities: (req, res) => {
         sequelize.query(`
-            SELECT city_id, ci.name, rating, co.country_id, co.name
+            SELECT city_id, ci.name AS city, rating, co.country_id, co.name AS country
             FROM cities AS ci
             JOIN countries AS co ON ci.country_id = co.country_id
             ORDER BY ci.rating desc;
