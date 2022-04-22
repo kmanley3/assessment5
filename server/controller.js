@@ -31,7 +31,9 @@ module.exports = {
             );
 
             insert into cities (name, rating, country_id)
-            values('Lehi', 4, 1);
+            values('Lehi', 4, '3'),
+            ('GoobTown', 5, '5'),
+            ('Berrybye', 1, '21');
 
             insert into countries (name)
             values ('Afghanistan'),
